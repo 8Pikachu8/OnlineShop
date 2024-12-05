@@ -10,7 +10,6 @@ namespace Modul_7_Homework.Model
     class OrdersCollection<TDelivery, TNumber> where TDelivery : Delivery
         where TNumber : Product
     {
-
         List<Order<TDelivery, TNumber>> orders;
 
         public OrdersCollection()
@@ -39,7 +38,6 @@ namespace Modul_7_Homework.Model
             return true;
         }
 
-        
 
         public void Display()
         {
