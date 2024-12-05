@@ -10,65 +10,41 @@ namespace Modul_7_Homework.Model
     class OrdersCollection<TDelivery, TNumber> where TDelivery : Delivery
     {
 
-        Order<TDelivery, TNumber>[] orders;
-
-        int count;
-
-        public int Tail { get { return count; } set { count = value; } }
+        List<Order<TDelivery, TNumber>> orders;
 
         public OrdersCollection()
         {
-            orders = new Order<TDelivery, TNumber>[5]; 
-            Tail = -1;
+            orders = new List<Order<TDelivery, TNumber>>();
         }
+
 
         public Order<TDelivery, TNumber> this[int index]
         {
             get
             {
-                if (index < Tail)
+                if (index < orders.Count)
                     return orders[index];
                 else
-                    return null;
-            }
-            set
-            {
-                if (index == orders.Length)
                 {
-                    orders = ExtendedCollection(orders);
-                    orders[Tail++] = value;
+                    Console.WriteLine("Данный индекс вне диапозона списка");
+                    return null;
                 }
             }
         }
 
         public bool AddOrder(Order<TDelivery, TNumber> order)
         {
-            if (orders.Length == Tail+1)
-            {
-                orders = ExtendedCollection(orders);
-                orders[++Tail] = order;
-                return true;
-            }
-            else
-            {
-                orders[++Tail] = order;
-                return true;
-            }
+            orders?.Add(order);
+            return true;
         }
 
-        Order<TDelivery, TNumber>[] ExtendedCollection(Order<TDelivery, TNumber>[] ord)
-        {
-            int Capacitance = ord.Length + 25;
-            Order<TDelivery, TNumber>[] extendedOrders = new Order<TDelivery, TNumber>[Capacitance];
-            Array.Copy(ord, extendedOrders, ord.Length);
-            return extendedOrders;
-        }
+        
 
         public void Display()
         {
-            for (int i = 0; i < Tail+1; i++)
+            for (int i = 0; i < orders.Count; i++)
             {
-                Console.WriteLine("Заказ номер: {0}\t Тип доставки: {1} Емкость: {2}", orders[i].Number, orders[i].Delivery.GetType().Name, orders.Length);
+                Console.WriteLine("Заказ номер: {0}\t Тип доставки: {1} Емкость: {2}", orders[i].Number, orders[i].Delivery.GetType().Name, orders.Capacity);
             }
             Console.WriteLine(new string('-', 50));
         }

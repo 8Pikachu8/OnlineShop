@@ -22,7 +22,5 @@ namespace Modul_7_Homework.Model
             Console.WriteLine(Delivery.Address);
         }
 
-
-
     }
 }
