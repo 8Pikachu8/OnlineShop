@@ -6,76 +6,57 @@ using System.Threading.Tasks;
 
 namespace Modul_7_Homework.Model
 {
-    class Product
+    abstract class Product
     {
         public string Number { get; set; }
         public decimal Price { get; set; }
     }
 
-
-    class ProductsClollection
+    internal class Jewelry : Product
     {
-        Product[] products;
+        public Jewelry() { }
 
-        int count;
 
-        public int Tail { get { return count; } set { count = value; } }
-
-        public ProductsClollection()
+        internal class ProductsClollection<TProduct> where TProduct : Product
         {
-            products = new Product[5];
-            Tail = -1;
-        }
+            List<TProduct> products;
 
-        public Product this[int index]
-        {
-            get
+            public ProductsClollection()
             {
-                if (index < Tail)
-                    return products[index];
-                else
-                    return null;
+                products = new List<TProduct>();
             }
-            set
+
+
+            public TProduct this[int index]
             {
-                if (index == products.Length)
+                get
                 {
-                    products = ExtendedCollection(products);
-                    products[Tail++] = value;
+                    if (index < products.Count)
+                        return products[index];
+                    else
+                    {
+                        Console.WriteLine("Данный индекс вне диапозона списка");
+                        return null;
+                    }
                 }
             }
-        }
 
-        public bool AddProduct(Product prod)
-        {
-            if (products.Length == Tail + 1)
+            public bool AddOrder(TProduct prod)
             {
-                products = ExtendedCollection(products);
-                products[++Tail] = prod;
+                products?.Add(prod);
                 return true;
             }
-            else
-            {
-                products[++Tail] = prod;
-                return true;
-            }
-        }
 
-        Product[] ExtendedCollection(Product[] prod)
-        {
-            int Capacitance = prod.Length + 25;
-            Product[] extendedOrders = new Product[Capacitance];
-            Array.Copy(prod, extendedOrders, prod.Length);
-            return extendedOrders;
-        }
 
-        public void Display()
-        {
-            for (int i = 0; i < Tail + 1; i++)
+
+            public void Display()
             {
-                Console.WriteLine("Заказ номер: {0}\t Стоимость: {1}", products[i].Number, products[i].Price);
+                for (int i = 0; i < products.Count; i++)
+                {
+                    Console.WriteLine("Заказ номер: {0}\t Стоимость: {1}", products[i].Number, products[i].Price);
+                }
+                Console.WriteLine(new string('-', 50));
             }
-            Console.WriteLine(new string('-', 50));
         }
     }
 }

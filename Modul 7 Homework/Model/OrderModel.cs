@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Modul_7_Homework.Model.Jewelry;
 
 namespace Modul_7_Homework.Model
 {
     class Order<TDelivery,
-    TNumber> where TDelivery : Delivery
+    TProduct> where TDelivery : Delivery
+        where TProduct : Product
     {
         public TDelivery Delivery;
 
-        public TNumber Number;
+        public int Number;
 
         public string Description;
 
-        public ProductsClollection[] Product;
+        public ProductsClollection<TProduct> Product;
 
         public void DisplayAddress()
         {

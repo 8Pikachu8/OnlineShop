@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Modul_7_Homework.Model
 {
     class OrdersCollection<TDelivery, TNumber> where TDelivery : Delivery
+        where TNumber : Product
     {
 
         List<Order<TDelivery, TNumber>> orders;
