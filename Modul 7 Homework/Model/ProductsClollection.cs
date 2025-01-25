@@ -9,19 +9,24 @@ namespace Modul_7_Homework.Model
     
     internal class ProductsClollection<TProduct> where TProduct : Product
     {
-        List<TProduct> products;
+        int position { get; set; } = -1;
+
+        int tail { get; set; } = -1;
+
+        int Capacity { get; set; } = 10;
+
+        TProduct[] products;
 
         public ProductsClollection()
         {
-            products = new List<TProduct>();
+            products = new TProduct[10];
         }
-
 
         public TProduct this[int index]
         {
             get
             {
-                if (index < products.Count)
+                if (index < products.Length)
                     return products[index];
                 else
                 {
@@ -31,22 +36,61 @@ namespace Modul_7_Homework.Model
             }
         }
 
-        public bool AddOrder(TProduct prod)
+        public bool AddProduct(TProduct order)
         {
-            products?.Add(prod);
+            ++tail;
+            if (products.Length == tail)
+            {
+                TProduct[] temp = new TProduct[this.Capacity];
+                products.CopyTo(temp, 0);
+                products = new TProduct[this.Capacity + 10];
+                temp.CopyTo(products, 0);
+                Capacity += 10;
+            }
+
+            products[tail] = order;
             return true;
         }
 
-
-
         public void Display()
         {
-            for (int i = 0; i < products.Count; i++)
+            for (int i = 0; i < tail; i++)
             {
-                Console.WriteLine("Заказ номер: {0}\t Стоимость: {1}", products[i].Number, products[i].Price);
+                Console.WriteLine("Продукт номер: {0}\t Тип продукта: {1} ", products[i].Number, products[i].GetType().Name);
             }
             Console.WriteLine(new string('-', 50));
         }
+
+        public object Current
+        {
+            get
+            {
+                return this.products[position];
+            }
+        }
+
+        public bool MoveNext()
+        {
+            if (this.position == this.tail)
+            {
+                Reset();
+                return false;
+            }
+            ++this.position;
+            return true;
+        }
+
+        public void Reset()
+        {
+            this.position = -1;
+        }
+
+        public ProductsClollection<TProduct> GetEnumerator()
+        {
+            return this;
+        }
+
+        
     }
 }
 

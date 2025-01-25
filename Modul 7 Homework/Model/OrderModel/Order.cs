@@ -16,12 +16,29 @@ namespace Modul_7_Homework.Model
 
         public string Description;
 
-        public ProductsClollection<TProduct> Product;
+        public ProductsClollection<TProduct> Products;
+
+        public Order()
+        {
+
+        }
+
+        public Order(int n, string d, TDelivery delivery, ProductsClollection<TProduct> pColl)
+        {
+            Number = n;
+            Description = d;
+            Products = pColl;
+            Delivery = delivery;
+        }
 
         public void DisplayAddress()
         {
             Console.WriteLine(Delivery.Address);
         }
 
+        public override string ToString()
+        {
+            return string.Format("Заказ номер: {0}\t Тип доставки: {1} ", this.Number, this.Delivery.GetType().Name);
+        }
     }
 }

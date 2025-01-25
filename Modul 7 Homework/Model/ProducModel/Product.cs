@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Modul_7_Homework.Model
 {
-    abstract class Product
+    public abstract class Product
     {
         public string Number { get; set; }
         public decimal Price { get; set; }
+
+        public abstract void DisplayInfo();
+
+       
     }
 }
