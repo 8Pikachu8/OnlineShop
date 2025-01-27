@@ -10,25 +10,46 @@ namespace Modul_7_Homework.Model
     TProduct> where TDelivery : Delivery
         where TProduct : Product
     {
-        public TDelivery Delivery;
 
-        public int Number;
+        TDelivery _delivery;
+        public TDelivery Delivery { get => _delivery; }
 
-        public string Description;
+        int _number;
 
-        public ProductsClollection<TProduct> Products;
+        public int Number { get => _number; }
+
+        string Description;
+
+        ProductsCollection<TProduct> _products;
+
+        public ProductsCollection<TProduct> Products { get => _products; }
 
         public Order()
         {
 
         }
 
-        public Order(int n, string d, TDelivery delivery, ProductsClollection<TProduct> pColl)
+        public Order(int n, TDelivery d)
         {
-            Number = n;
+            _number = n;
+            _delivery = d;
+
+        }
+
+        public Order(int n, TDelivery d, ProductsCollection<TProduct> P)
+        {
+            _number = n;
+
+            _delivery = d;
+            _products = P;
+        }
+
+        public Order(int n, string d, TDelivery delivery, ProductsCollection<TProduct> pColl)
+        {
+            _number = n;
             Description = d;
-            Products = pColl;
-            Delivery = delivery;
+            _products = pColl;
+            _delivery = delivery;
         }
 
         public void DisplayAddress()
@@ -38,7 +59,7 @@ namespace Modul_7_Homework.Model
 
         public override string ToString()
         {
-            return string.Format("Заказ номер: {0}\t Тип доставки: {1} ", this.Number, this.Delivery.GetType().Name);
+            return string.Format("Заказ номер: {0}\t Тип доставки: {1} \t Комментарий: {2}", this.Number, this.Delivery.GetType().Name, Description);
         }
     }
 }

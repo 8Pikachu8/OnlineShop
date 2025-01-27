@@ -8,10 +8,18 @@ namespace Modul_7_Homework.Model
 {
     public abstract class Product
     {
-        public string Number { get; set; }
-        public decimal Price { get; set; }
+        string _number;
+        decimal _price;
+
+        public string Number { get => _number; }
+        protected decimal Price { get; set; }
 
         public abstract void DisplayInfo();
+
+        public Product(string num)
+        {
+            _number = num;
+        }
 
        
     }

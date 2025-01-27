@@ -8,7 +8,14 @@ namespace Modul_7_Homework.Model
 {
     abstract class Delivery
     {
-        public string Address { get; set; }
-        public decimal Price { get; set; }
+        string _address;
+
+        public string Address { get; }
+        protected decimal Price { get; set; }
+
+        public Delivery(string ard)
+        {
+            _address = ard;
+        }
     }
 }

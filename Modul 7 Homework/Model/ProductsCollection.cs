@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modul_7_Homework.Model.ProducModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace Modul_7_Homework.Model
 {
     
-    internal class ProductsClollection<TProduct> where TProduct : Product
+    internal class ProductsCollection<TProduct> where TProduct : Product
     {
         int position { get; set; } = -1;
 
@@ -17,7 +18,7 @@ namespace Modul_7_Homework.Model
 
         TProduct[] products;
 
-        public ProductsClollection()
+        public ProductsCollection()
         {
             products = new TProduct[10];
         }
@@ -85,12 +86,11 @@ namespace Modul_7_Homework.Model
             this.position = -1;
         }
 
-        public ProductsClollection<TProduct> GetEnumerator()
+        public ProductsCollection<TProduct> GetEnumerator()
         {
             return this;
         }
 
-        
     }
 }
 

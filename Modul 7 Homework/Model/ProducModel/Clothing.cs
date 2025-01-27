@@ -8,13 +8,12 @@ namespace Modul_7_Homework.Model.ProducModel
 {
     public class Clothing : Product
     {
-        public string Size { get; set; }
-        public string Material { get; set; }
-        public string Gender { get; set; }
+        protected string Size { get; set; }
+        protected string Material { get; set; }
+        protected string Gender { get; set; }
 
-        public Clothing(string number, decimal price, string size, string material, string gender)
+        public Clothing(string number, decimal price, string size, string material, string gender) : base(number)
         {
-            Number = number;
             Price = price;
             Size = size;
             Material = material;
